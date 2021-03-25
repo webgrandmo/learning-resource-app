@@ -17,12 +17,7 @@ export default {
   components: {
     ResourceItem,
   },
-  props: {
-    resources: {
-      type: Array,
-      required: true,
-    },
-  },
+  inject: ['resources'],
 };
 </script>
 
