@@ -1,4 +1,15 @@
 <template>
+  <base-modal-message v-if="isInvalidInput">
+    <template v-slot:header>
+      <h2>Input value is invalid!</h2>
+    </template>
+    <template v-slot:actions>
+      <p>Please fill all inputs</p>
+      <base-button :mode="null" @click="confirmError"
+        >Confirm error
+      </base-button>
+    </template>
+  </base-modal-message>
   <base-card>
     <template v-slot:card>
       <form @submit.prevent="submitData">
@@ -52,16 +63,36 @@ textarea:focus {
 
 
 <script>
-// import BaseCard from '../ui/BaseCard.vue';
+import BaseModalMessage from '../ui/BaseModalMessage.vue';
 export default {
   inject: ['addResource'],
+  data() {
+    return {
+      isInvalidInput: false,
+    };
+  },
+  components: {
+    BaseModalMessage,
+  },
   methods: {
     submitData() {
       const enteredTitle = this.$refs.titleInput.value;
       const enteredDescription = this.$refs.descInput.value;
       const enteredUrl = this.$refs.linkInput.value;
 
+      if (
+        !enteredTitle.trim() ||
+        !enteredDescription.trim() ||
+        !enteredUrl.trim()
+      ) {
+        console.log('INput is empty', enteredTitle);
+        this.isInvalidInput = true;
+        return;
+      }
       this.addResource(enteredTitle, enteredDescription, enteredUrl);
+    },
+    confirmError() {
+      this.isInvalidInput = false;
     },
   },
 };

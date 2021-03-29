@@ -21,6 +21,7 @@
 <script>
 import ResourceList from './ResourceList.vue';
 import AddResource from './AddResource.vue';
+import BaseButton from '../ui/BaseButton.vue';
 export default {
   data() {
     return {
@@ -44,6 +45,7 @@ export default {
   components: {
     ResourceList,
     AddResource,
+    BaseButton,
   },
   provide() {
     return {
@@ -51,6 +53,7 @@ export default {
       addResource: this.addResource,
     };
   },
+
   computed: {
     storedResBtnMode() {
       return this.selectedTab === 'resource-list' ? null : 'flat';
