@@ -4,7 +4,9 @@
       <template v-slot:card>
         <header>
           <h3>{{ resourceTitle }}</h3>
-          <base-button type="button" mode="flat">Delete</base-button>
+          <base-button type="button" mode="flat" @click="deleteResource(id)"
+            >Delete</base-button
+          >
         </header>
 
         <p>{{ resourceDesc }}</p>
@@ -19,6 +21,7 @@
 <script>
 export default {
   name: 'ResourceItem',
+  inject: ['deleteResource'],
   props: {
     id: {
       type: String,
