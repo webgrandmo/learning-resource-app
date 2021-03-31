@@ -1,15 +1,28 @@
 <template>
-  <dialog open>
-    <header>
-      <slot name="header"></slot>
-    </header>
-    <section>
-      <slot name="actions"></slot>
-    </section>
-  </dialog>
+  <teleport to="body">
+    <div @click="$emit('close-dialog')">
+      <dialog open>
+        <header>
+          <slot name="header"></slot>
+        </header>
+        <section>
+          <slot name="actions"></slot>
+        </section>
+      </dialog>
+    </div>
+  </teleport>
 </template>
 
 <style scoped>
+div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+}
 header {
   color: #fff;
   background: #3a0061;

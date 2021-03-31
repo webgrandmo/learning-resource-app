@@ -1,5 +1,5 @@
 <template>
-  <base-modal-message v-if="isInvalidInput">
+  <base-modal-message v-if="isInvalidInput" @close-dialog="closeDialog">
     <template v-slot:header>
       <h2>Input value is invalid!</h2>
     </template>
@@ -93,6 +93,9 @@ export default {
     },
     confirmError() {
       this.isInvalidInput = false;
+    },
+    closeDialog() {
+      this.confirmError();
     },
   },
 };
